@@ -1,0 +1,54 @@
+---
+- name: Test des services critiques CYNA SR
+  hosts: all
+  become: yes
+  vars:
+    services:
+      - zabbix-server
+      - wazuh-manager
+      - nginx
+      - mysql
+      - rsyslog
+      - wazuh-agent
+  tasks:
+
+    - name: Vérifier que les services sont actifs
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: started
+      loop: "{{ services }}"
+      register: result_services
+
+    - name: Afficher le statut de chaque service
+      debug:
+        msg: "Service {{ item.item }} -> statut: {{ item.state }}"
+      loop: "{{ result_services.results }}"
+
+    - name: Tester la résolution DNS
+      ansible.builtin.shell: "host zabbix.local"
+      register: dns_test
+      ignore_errors: yes
+
+    - name: Afficher le résultat de la résolution DNS
+      debug:
+        var: dns_test.stdout
+
+    - name: Ping de test vers la passerelle réseau
+      ansible.builtin.ping:
+
+    - name: Vérification connectivité Internet
+      ansible.builtin.uri:
+        url: https://www.google.com
+        method: GET
+        return_content: no
+      register: internet_check
+      ignore_errors: yes
+
+    - name: Résultat de la connectivité Internet
+      debug:
+        msg: >
+          {% if internet_check.status == 200 %}
+            Accès Internet fonctionnel.
+          {% else %}
+            Problème d'accès Internet : Code {{ internet_check.status }}
+          {% endif %}
