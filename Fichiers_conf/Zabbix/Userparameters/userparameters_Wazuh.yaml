@@ -1,0 +1,3 @@
+Le fichier des userparameters se trouvent dans /etc/zabbix/zabbix_agentd.d/wazuh_status.conf
+
+UserParameter=wazuh.status,if systemctl is-active --quiet wazuh-indexer; then echo 1; else echo 0; fi

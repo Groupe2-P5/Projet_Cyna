@@ -1,0 +1,3 @@
+Userparameters disponible sur /etc/zabbix/zabbix_agentd.d/rsync_status.conf
+
+UserParameter=rsync.status,if systemctl is-active --quiet rsync; then echo 1; else echo 0; fi

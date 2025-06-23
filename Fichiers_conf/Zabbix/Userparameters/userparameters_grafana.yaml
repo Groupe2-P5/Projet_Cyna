@@ -1,0 +1,3 @@
+Userparameters disponible sur /etc/zabbix/zabbix_agentd.d/grafana_status.conf
+
+UserParameter=grafana.status,if systemctl is-active --quiet grafana-server; then echo 1; else echo 0; fi

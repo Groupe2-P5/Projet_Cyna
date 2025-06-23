@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>7.0</version>
+    <host_groups>
+        <host_group>
+            <uuid>d63ab9ab9f674e6e966bd7d1b1c0edb7</uuid>
+            <name>Projet_Cyna</name>
+        </host_group>
+        <host_group>
+            <uuid>6f6799aa69e844b4b3918f779f2abf08</uuid>
+            <name>Zabbix servers</name>
+        </host_group>
+    </host_groups>
+    <hosts>
+        <host>
+            <host>Grafana</host>
+            <name>Grafana</name>
+            <groups>
+                <group>
+                    <name>Projet_Cyna</name>
+                </group>
+            </groups>
+            <interfaces>
+                <interface>
+                    <ip>192.168.30.10</ip>
+                    <interface_ref>if1</interface_ref>
+                </interface>
+            </interfaces>
+            <items>
+                <item>
+                    <name>Etat du Service Grafana</name>
+                    <key>grafana.status</key>
+                    <valuemap>
+                        <name>Etat du service</name>
+                    </valuemap>
+                    <interface_ref>if1</interface_ref>
+                    <tags>
+                        <tag>
+                            <tag>Vérification</tag>
+                            <value>Service</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <expression>last(/Grafana/grafana.status)=0</expression>
+                            <name>Le service Grafana est arreté sur {HOST.NAME}</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Ping ICMP</name>
+                    <type>SIMPLE</type>
+                    <key>icmpping</key>
+                    <valuemap>
+                        <name>Statue du Ping</name>
+                    </valuemap>
+                    <interface_ref>if1</interface_ref>
+                    <tags>
+                        <tag>
+                            <tag>Vérification</tag>
+                            <value>Ping</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <expression>max(/Grafana/icmpping,#3)=0</expression>
+                            <name>Pas de Ping ICMP sur {HOST.NAME}</name>
+                            <priority>AVERAGE</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Charge CPU</name>
+                    <key>system.cpu.load</key>
+                    <delay>10s</delay>
+                    <value_type>FLOAT</value_type>
+                    <interface_ref>if1</interface_ref>
+                    <tags>
+                        <tag>
+                            <tag>Composant</tag>
+                            <value>CPU</value>
+                        </tag>
+                    </tags>
+                </item>
+            </items>
+            <tags>
+                <tag>
+                    <tag>Localisation</tag>
+                    <value>Genève</value>
+                </tag>
+                <tag>
+                    <tag>OS</tag>
+                    <value>Debian</value>
+                </tag>
+                <tag>
+                    <tag>Rôle</tag>
+                    <value>Gestion de logs</value>
+                </tag>
+                <tag>
+                    <tag>Sauvegarde</tag>
+                    <value>Existante</value>
+                </tag>
+                <tag>
+                    <tag>Service</tag>
+                    <value>Grafana</value>
+                </tag>
+                <tag>
+                    <tag>VLAN</tag>
+                    <value>30</value>
+                </tag>
+            </tags>
+            <inventory_mode>DISABLED</inventory_mode>
+            <valuemaps>
+                <valuemap>
+                    <name>Etat du service</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>En Panne</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Fonctionne</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <name>Statue du Ping</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Pas de ping</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Ping reçu</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+            </valuemaps>
+        </host>
+        <host>
+            <host>pfSense.home.arpa</host>
+            <name>PfSense</name>
+            <groups>
+                <group>
+                    <name>Projet_Cyna</name>
+                </group>
+            </groups>
+            <interfaces>
+                <interface>
+                    <ip>10.4.105.200</ip>
+                    <interface_ref>if1</interface_ref>
+                </interface>
+            </interfaces>
+            <items>
+                <item>
+                    <name>Ping ICMP</name>
+                    <type>SIMPLE</type>
+                    <key>icmpping</key>
+                    <valuemap>
+                        <name>Statue du Ping</name>
+                    </valuemap>
+                    <interface_ref>if1</interface_ref>
+                    <tags>
+                        <tag>
+                            <tag>Vérification</tag>
+                            <value>Ping</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <expression>max(/pfSense.home.arpa/icmpping,#3)=0</expression>
+                            <name>Pas de Ping ICMP sur {HOST.NAME}</name>
+                            <priority>AVERAGE</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Charge CPU</name>
+                    <key>system.cpu.load</key>
+                    <delay>10s</delay>
+                    <value_type>FLOAT</value_type>
+                    <interface_ref>if1</interface_ref>
+                    <tags>
+                        <tag>
+                            <tag>Composant</tag>
+                            <value>CPU</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <name>Uptime Pfsense</name>
+                    <key>system.uptime</key>
+                    <valuemap>
+                        <name>Etat du service</name>
+                    </valuemap>
+                    <interface_ref>if1</interface_ref>
+                    <tags>
+                        <tag>
+                            <tag>Vérification</tag>
+                            <value>pfSense</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <expression>last(/pfSense.home.arpa/system.uptime)=0</expression>
+                            <name>Le service PfSense est arreté sur {HOST.NAME}</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <tags>
+                <tag>
+                    <tag>Localisation</tag>
+                    <value>Genève</value>
+                </tag>
+                <tag>
+                    <tag>OS</tag>
+                    <value>pfSense</value>
+                </tag>
+                <tag>
+                    <tag>Rôle</tag>
+                    <value>Pare-feu</value>
+                </tag>
+                <tag>
+                    <tag>Sauvegarde</tag>
+                    <value>Existante</value>
+                </tag>
+                <tag>
+                    <tag>Service</tag>
+                    <value>pfSense</value>
+                </tag>
+            </tags>
+            <inventory_mode>DISABLED</inventory_mode>
+            <valuemaps>
+                <valuemap>
+                    <name>Etat du service</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>En Panne</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Fonctionne</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <name>Statue du Ping</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Pas de ping</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Ping reçu</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+            </valuemaps>
+        </host>
+        <host>
+            <host>rsync</host>
+            <name>Rsync</name>
+            <groups>
+                <group>
+                    <name>Projet_Cyna</name>
+                </group>
+            </groups>
+            <interfaces>
+                <interface>
+                    <ip>192.168.50.10</ip>
+                    <interface_ref>if1</interface_ref>
+                </interface>
+            </interfaces>
+            <items>
+                <item>
+                    <name>Ping ICMP</name>
+                    <type>SIMPLE</type>
+                    <key>icmpping</key>
+                    <valuemap>
+                        <name>Statue du Ping</name>
+                    </valuemap>
+                    <interface_ref>if1</interface_ref>
+                    <tags>
+                        <tag>
+                            <tag>Vérification</tag>
+                            <value>Ping</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <expression>max(/rsync/icmpping,#3)=0</expression>
+                            <name>Pas de Ping ICMP sur {HOST.NAME}</name>
+                            <priority>AVERAGE</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Etat du Service de Sauvegarde</name>
+                    <key>rsync.status</key>
+                    <valuemap>
+                        <name>Etat du service</name>
+                    </valuemap>
+                    <interface_ref>if1</interface_ref>
+                    <tags>
+                        <tag>
+                            <tag>Vérification</tag>
+                            <value>Service</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <expression>last(/rsync/rsync.status)=0</expression>
+                            <name>Le service Sauvegarde est arreté sur {HOST.NAME}</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Charge CPU</name>
+                    <key>system.cpu.load</key>
+                    <delay>10s</delay>
+                    <value_type>FLOAT</value_type>
+                    <interface_ref>if1</interface_ref>
+                    <tags>
+                        <tag>
+                            <tag>Composant</tag>
+                            <value>CPU</value>
+                        </tag>
+                    </tags>
+                </item>
+            </items>
+            <tags>
+                <tag>
+                    <tag>Localisation</tag>
+                    <value>Genève</value>
+                </tag>
+                <tag>
+                    <tag>OS</tag>
+                    <value>Debian</value>
+                </tag>
+                <tag>
+                    <tag>Rôle</tag>
+                    <value>Sauvegarde de fichier conf</value>
+                </tag>
+                <tag>
+                    <tag>Sauvegarde</tag>
+                    <value>Existante</value>
+                </tag>
+                <tag>
+                    <tag>Service</tag>
+                    <value>Rsync</value>
+                </tag>
+                <tag>
+                    <tag>VLAN</tag>
+                    <value>50</value>
+                </tag>
+            </tags>
+            <inventory_mode>DISABLED</inventory_mode>
+            <valuemaps>
+                <valuemap>
+                    <name>Etat du service</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>En Panne</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Fontionne</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <name>Statue du Ping</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Pas de Ping</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Ping reçu</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+            </valuemaps>
+        </host>
+        <host>
+            <host>Wazuh</host>
+            <name>Wazuh</name>
+            <description>Hôte Wazuh du Projet Cyna</description>
+            <groups>
+                <group>
+                    <name>Projet_Cyna</name>
+                </group>
+            </groups>
+            <interfaces>
+                <interface>
+                    <ip>192.168.10.10</ip>
+                    <interface_ref>if1</interface_ref>
+                </interface>
+            </interfaces>
+            <items>
+                <item>
+                    <name>Ping ICMP</name>
+                    <type>SIMPLE</type>
+                    <key>icmpping</key>
+                    <valuemap>
+                        <name>Statue du Ping</name>
+                    </valuemap>
+                    <interface_ref>if1</interface_ref>
+                    <tags>
+                        <tag>
+                            <tag>Vérification</tag>
+                            <value>Ping</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <expression>max(/Wazuh/icmpping,#3)=0</expression>
+                            <name>Pas de Ping ICMP sur {HOST.NAME}</name>
+                            <priority>AVERAGE</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Charge CPU</name>
+                    <key>system.cpu.load</key>
+                    <delay>10s</delay>
+                    <value_type>FLOAT</value_type>
+                    <interface_ref>if1</interface_ref>
+                    <tags>
+                        <tag>
+                            <tag>Composant</tag>
+                            <value>CPU</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <name>Etat du Service Wazuh</name>
+                    <key>wazuh.status</key>
+                    <valuemap>
+                        <name>Etat du service</name>
+                    </valuemap>
+                    <interface_ref>if1</interface_ref>
+                    <tags>
+                        <tag>
+                            <tag>Vérification</tag>
+                            <value>Service</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <expression>last(/Wazuh/wazuh.status)=0</expression>
+                            <name>Le service Wazuh est arreté sur {HOST.NAME}</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <tags>
+                <tag>
+                    <tag>Localisation</tag>
+                    <value>Genève</value>
+                </tag>
+                <tag>
+                    <tag>OS</tag>
+                    <value>Debian</value>
+                </tag>
+                <tag>
+                    <tag>Rôle</tag>
+                    <value>Sécurité</value>
+                </tag>
+                <tag>
+                    <tag>Sauvegarde</tag>
+                    <value>Existante</value>
+                </tag>
+                <tag>
+                    <tag>Service</tag>
+                    <value>Wazuh</value>
+                </tag>
+                <tag>
+                    <tag>VLAN</tag>
+                    <value>10</value>
+                </tag>
+            </tags>
+            <inventory_mode>DISABLED</inventory_mode>
+            <valuemaps>
+                <valuemap>
+                    <name>Etat du service</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>En Panne</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Fonctionne</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <name>Statue du Ping</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Pas de ping</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Ping reçu</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+            </valuemaps>
+        </host>
+        <host>
+            <host>Zabbix server</host>
+            <name>Zabbix server</name>
+            <templates>
+                <template>
+                    <name>Linux by Zabbix agent</name>
+                </template>
+                <template>
+                    <name>Zabbix server health</name>
+                </template>
+            </templates>
+            <groups>
+                <group>
+                    <name>Zabbix servers</name>
+                </group>
+            </groups>
+            <interfaces>
+                <interface>
+                    <interface_ref>if1</interface_ref>
+                </interface>
+            </interfaces>
+            <tags>
+                <tag>
+                    <tag>Localisation</tag>
+                    <value>Genève</value>
+                </tag>
+                <tag>
+                    <tag>OS</tag>
+                    <value>Debian</value>
+                </tag>
+                <tag>
+                    <tag>Rôle</tag>
+                    <value>Supervision</value>
+                </tag>
+                <tag>
+                    <tag>Sauvegarde</tag>
+                    <value>Existante</value>
+                </tag>
+                <tag>
+                    <tag>Service</tag>
+                    <value>Zabbix</value>
+                </tag>
+                <tag>
+                    <tag>VLAN</tag>
+                    <value>30</value>
+                </tag>
+            </tags>
+            <inventory>
+                <name>zabbix</name>
+                <os>Linux version 6.1.0-37-amd64 (debian-kernel@lists.debian.org) (gcc-12 (Debian 12.2.0-14+deb12u1) 12.2.0, GNU ld (GNU Binutils fo</os>
+                <location_lat>56.95387</location_lat>
+                <location_lon>24.22067</location_lon>
+            </inventory>
+            <inventory_mode>AUTOMATIC</inventory_mode>
+        </host>
+    </hosts>
+</zabbix_export>
