@@ -1,0 +1,478 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 2,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "deomqcf0jmdc0f"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 23,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "dedupStrategy": "none",
+        "enableInfiniteScrolling": false,
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "deomqcf0jmdc0f"
+          },
+          "direction": "backward",
+          "editorMode": "builder",
+          "expr": "{host=\"$ServerName\"} |= ``",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "live logs",
+      "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "deomqcf0jmdc0f"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 23,
+        "x": 0,
+        "y": 10
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "deomqcf0jmdc0f"
+          },
+          "direction": "backward",
+          "editorMode": "builder",
+          "expr": "rate({host=\"$ServerName\"} [1m])",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "débit de logs",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "deomqcf0jmdc0f"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 21
+      },
+      "id": 4,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "deomqcf0jmdc0f"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "{host=\"$ServerName\"} |= `error`",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Logs ERROR",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "deomqcf0jmdc0f"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-orange"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 21
+      },
+      "id": 6,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "deomqcf0jmdc0f"
+          },
+          "direction": "backward",
+          "editorMode": "builder",
+          "expr": "{host=\"$ServerName\"} |= `warn`",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Logs WARN",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "deomqcf0jmdc0f"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-blue"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 7,
+        "x": 16,
+        "y": 21
+      },
+      "id": 7,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "deomqcf0jmdc0f"
+          },
+          "direction": "backward",
+          "editorMode": "builder",
+          "expr": "{host=\"$ServerName\"} |= `info`",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Logs INFO",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "deomqcf0jmdc0f"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple"
+              },
+              {
+                "color": "red",
+                "value": 30
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 23,
+        "x": 0,
+        "y": 28
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "deomqcf0jmdc0f"
+          },
+          "direction": "backward",
+          "editorMode": "builder",
+          "expr": "count_over_time({host=\"$ServerName\"} |= `error` [5m])",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Nombre d'erreurs sur 5 min",
+      "type": "stat"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "",
+          "value": ""
+        },
+        "description": "",
+        "hide": 1,
+        "label": "Search (case insensitive)",
+        "name": "searchable_pattern",
+        "options": [
+          {
+            "selected": true,
+            "text": "",
+            "value": ""
+          }
+        ],
+        "query": "",
+        "type": "textbox"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": [
+            "ansible"
+          ],
+          "value": [
+            "ansible"
+          ]
+        },
+        "datasource": {
+          "type": "loki",
+          "uid": "deomqcf0jmdc0f"
+        },
+        "definition": "",
+        "description": "",
+        "hide": 1,
+        "includeAll": false,
+        "label": "Server Name",
+        "multi": true,
+        "name": "ServerName",
+        "options": [],
+        "query": {
+          "label": "host",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "{job=~\".+\"}",
+          "type": 1
+        },
+        "refresh": 2,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Servers",
+  "uid": "3759735f-3893-4fdb-b472-6a46bf774e76",
+  "version": 61
+}
