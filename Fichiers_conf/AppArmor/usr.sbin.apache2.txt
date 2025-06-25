@@ -1,0 +1,17 @@
+# Last Modified: Sat Jun 21 10:59:12 2025
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/sbin/apache2 flags=(complain) {
+  include <abstractions/base>
+
+  /usr/sbin/apache2 mr,
+
+
+  ^DEFAULT_URI flags=(complain) {
+  }
+
+  ^HANDLING_UNTRUSTED_INPUT flags=(complain) {
+  }
+}

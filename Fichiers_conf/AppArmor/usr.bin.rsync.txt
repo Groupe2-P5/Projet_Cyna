@@ -1,0 +1,11 @@
+# Last Modified: Sat Jun 21 10:52:33 2025
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/bin/rsync flags=(complain) {
+  include <abstractions/base>
+
+  /usr/bin/rsync mr,
+
+}
