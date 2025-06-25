@@ -1,0 +1,12 @@
+# Last Modified: Sat Jun 21 10:44:53 2025
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/var/ossec/bin/wazuh-remoted flags=(complain) {
+  include <abstractions/base>
+
+  /var/ossec/bin/wazuh-remoted mr,
+  /var/ossec/lib/lib*so* mr,
+
+}

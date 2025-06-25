@@ -1,0 +1,11 @@
+# Last Modified: Thu Jun 12 14:03:29 2025
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/sbin/zabbix_server flags=(complain) {
+  include <abstractions/base>
+
+  /usr/sbin/zabbix_server mr,
+
+}

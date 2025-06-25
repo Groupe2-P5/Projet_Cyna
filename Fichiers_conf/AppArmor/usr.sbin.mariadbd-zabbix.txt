@@ -1,0 +1,16 @@
+#include <tunables/global>
+
+profile usr.sbin.mariadbd-zabbix flags=(complain) {
+  #include <abstractions/base>
+
+  capability,
+  network,
+  /usr/sbin/mariadbd mr,
+  /etc/mysql/** r,
+  /var/lib/mysql/** rw,
+  /var/log/mysql/** rw,
+  /tmp/** rw,
+  /proc/** r,
+  /sys/** r,
+  /dev/** rw,
+}

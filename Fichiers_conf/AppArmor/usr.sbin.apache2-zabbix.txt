@@ -1,0 +1,16 @@
+#include <tunables/global>
+
+profile usr.sbin.apache2-zabbix flags=(complain) {
+  #include <abstractions/base>
+
+  capability,
+  network,
+  /usr/sbin/apache2 mr,
+  /etc/apache2/** r,
+  /var/www/html/** r,
+  /var/log/apache2/** rw,
+  /tmp/** rw,
+  /proc/** r,
+  /sys/** r,
+  /dev/** rw,
+}

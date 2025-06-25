@@ -1,0 +1,12 @@
+# Last Modified: Sat Jun 21 10:41:46 2025
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/var/ossec/bin/wazuh-analysisd flags=(complain) {
+  include <abstractions/base>
+
+  /var/ossec/bin/wazuh-analysisd mr,
+  /var/ossec/lib/lib*so* mr,
+
+}
