@@ -1,11 +1,26 @@
-# Last Modified: Thu Jun 12 14:03:29 2025
+# Last Modified: Wed Jun 25 13:59:48 2025
 abi <abi/3.0>,
 
 include <tunables/global>
 
 /usr/sbin/zabbix_server flags=(complain) {
+  include <abstractions/apache2-common>
   include <abstractions/base>
+  include <abstractions/dovecot-common>
+  include <abstractions/postfix-common>
+  include <abstractions/user-tmp>
 
+  /etc/hosts r,
+  /etc/ld.so.cache r,
+  /usr/bin/dash mrix,
   /usr/sbin/zabbix_server mr,
+  owner /etc/group r,
+  owner /etc/nsswitch.conf r,
+  owner /etc/passwd r,
+  owner /etc/zabbix/zabbix_server.conf r,
+  owner /proc/sys/kernel/random/boot_id r,
+  owner /run/systemd/userdb/ r,
+  owner /run/zabbix/zabbix_server.pid w,
+  owner /var/log/zabbix/zabbix_server.log rw,
 
 }
